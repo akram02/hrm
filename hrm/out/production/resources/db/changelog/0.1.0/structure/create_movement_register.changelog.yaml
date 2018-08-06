@@ -1,0 +1,35 @@
+databaseChangeLog:
+  - changeSet:
+      id: create movement register
+      author: ishmum
+      changes:
+        - createTable:
+            tableName: movements
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: reason
+                  type: varchar(200)
+              - column:
+                  name: is_entry
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    defaultValueComputed: now
+              - column:
+                  name: user_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_movement_user
+                    references: users(id)

@@ -1,0 +1,23 @@
+databaseChangeLog:
+  - changeSet:
+      id: add salary & department to user details
+      author: ishmum
+      changes:
+        - addColumn:
+            tableName: user_details
+            columns:
+              - column:
+                  name: department_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_user_department
+                    references: departments(id)
+        - addColumn:
+            tableName: user_details
+            columns:
+              - column:
+                  name: salary
+                  type: currency
+                  constraints:
+                    nullable: false

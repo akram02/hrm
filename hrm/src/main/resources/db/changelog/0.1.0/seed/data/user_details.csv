@@ -1,0 +1,2 @@
+user_id, type_id, state_id, designation_id, department_id, salary
+1, 1, 1, 1, 1, 60000

@@ -1,0 +1,96 @@
+databaseChangeLog:
+  - changeSet:
+      id: create entity change log
+      author: ishmum
+      changes:
+        - createTable:
+            tableName: entity_change_types
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: entity_types
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+        - createTable:
+            tableName: entity_changes
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: entity_type_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_entity_type
+                    references: entity_types(id)
+              - column:
+                  name: entity_change_type_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_entity_change_type
+                    references: entity_change_types(id)
+              - column:
+                  name: time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    defaultValueComputed: now
+              - column:
+                  name: changer_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_entity_changer_user
+                    references: users(id)
+        - createTable:
+            tableName: entity_attribute_change
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: entity_change_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_entity_change_attribute
+                    references: entity_changes(id)
+              - column:
+                  name: attribute_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: previous_value
+                  type: varchar(256)
+              - column:
+                  name: new_value
+                  type: varchar(256)

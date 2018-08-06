@@ -1,0 +1,81 @@
+databaseChangeLog:
+  - changeSet:
+      id: create message tables
+      author: ishmum
+      changes:
+        - createTable:
+            tableName: messages
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: sender_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_sender_user
+                    references: users(id)
+              - column:
+                  name: message
+                  type: clob
+                  constraints:
+                    nullable: false
+              - column:
+                  name: time
+                  type: timestamp
+                  constraints:
+                    nullable: false
+                    defaultValueComputed: now
+        - createTable:
+            tableName: personal_messages
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: message_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_personal_message
+                    references: messages(id)
+              - column:
+                  name: receiver_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_receiver_user
+                    references: users(id)
+        - createTable:
+            tableName: departmental_messages
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: message_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_departmental_message
+                    references: messages(id)
+              - column:
+                  name: department_id
+                  type: int
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_receiver_department
+                    references: departments(id)

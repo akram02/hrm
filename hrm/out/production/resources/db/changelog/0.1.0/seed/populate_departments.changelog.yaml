@@ -1,0 +1,18 @@
+databaseChangeLog:
+  - changeSet:
+      id: populate departments
+      author: ishmum
+      changes:
+        - loadData:
+            file: data/departments.csv
+            relativeToChangelogFile: true
+            tableName: departments
+            quotchar: '"'
+        - loadData:
+            file: data/department_states.csv
+            relativeToChangelogFile: true
+            tableName: department_states
+        - loadData:
+            file: data/department_details.csv
+            relativeToChangelogFile: true
+            tableName: department_details

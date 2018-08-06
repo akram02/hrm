@@ -1,0 +1,25 @@
+databaseChangeLog:
+  - changeSet:
+      id: create office profile
+      author: ishmum
+      changes:
+        - createTable:
+            tableName: office_profile
+            columns:
+              - column:
+                  name: id
+                  type: int
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: attribute
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: value
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
